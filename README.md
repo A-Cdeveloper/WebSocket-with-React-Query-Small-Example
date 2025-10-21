@@ -101,10 +101,12 @@ Navigate to `http://localhost:5173`
 
 - `GET /api/people` - Fetch all people
 - `POST /api/people` - Add new person
+- `DELETE /api/people/:id` - Delete person by ID
 
 ## WebSocket Events
 
 - `new-person` - Broadcasted when a new person is added
+- `person-deleted` - Broadcasted when a person is deleted
 
 ## Development Notes
 
