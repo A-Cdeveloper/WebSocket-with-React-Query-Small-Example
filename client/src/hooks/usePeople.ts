@@ -1,15 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-
-export type PersonType = {
-  id: number;
-  name: string;
-  age: number;
-  profession: string;
-  workStatus: string;
-};
+import { config } from "../config/env";
+import type { PersonType } from "../@types";
 
 const fetchPeople = async (): Promise<PersonType[]> => {
-  const response = await fetch("http://localhost:4002/api/people");
+  const response = await fetch(`${config.API_URL}/api/people`);
   if (!response.ok) {
     throw new Error("Failed to fetch people");
   }

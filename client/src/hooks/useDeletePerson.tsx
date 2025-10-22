@@ -1,18 +1,20 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { config } from "../config/env";
+import type { PersonType } from "../@types";
 
-const deletePerson = async (id: number) => {
-  const response = await fetch(`http://localhost:4002/api/people/${id}`, {
+const deletePerson = async (id: number): Promise<PersonType> => {
+  const response = await fetch(`${config.API_URL}/api/people/${id}`, {
     method: "DELETE",
   });
   if (!response.ok) {
     throw new Error("Failed to delete person");
   }
-  return response.json();
+  return response.json() as Promise<PersonType>;
 };
 
 export const useDeletePerson = () => {
   const queryClient = useQueryClient();
-  const { mutate, isPending, error } = useMutation<void, Error, number>({
+  const { mutate, isPending, error } = useMutation<PersonType, Error, number>({
     mutationFn: deletePerson,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["people"] });

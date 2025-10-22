@@ -1,14 +1,13 @@
 import { usePeople } from "../hooks/usePeople";
-import { usePeopleSocket } from "../hooks/usePeopleSocket";
+import { useSocket } from "../hooks/useSocket";
+import { config } from "../config/env";
 import AddPerson from "./AddPerson";
 import Person from "./Person";
 
 const People = () => {
   const { data, isLoading, error } = usePeople();
 
-  console.log("render People");
-
-  usePeopleSocket();
+  useSocket(config.WS_URL);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error?.message}</div>;

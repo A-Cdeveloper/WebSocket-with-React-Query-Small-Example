@@ -1,5 +1,5 @@
 import { useDeletePerson } from "../hooks/useDeletePerson";
-import type { PersonType } from "../hooks/usePeople";
+import type { PersonType } from "../@types";
 
 const Person = ({ person }: { person: PersonType }) => {
   const { deletePerson, isPending, error } = useDeletePerson();

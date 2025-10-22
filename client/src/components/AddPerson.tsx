@@ -1,10 +1,9 @@
 import React from "react";
-import { useAddPeople, type NewPerson } from "../hooks/useAddPeople";
+import { useAddPeople } from "../hooks/useAddPeople";
+import type { NewPerson } from "../@types";
 
 const AddPerson = () => {
   const { mutate: addPerson, isPending } = useAddPeople();
-
-  console.log("render AddPerson");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
