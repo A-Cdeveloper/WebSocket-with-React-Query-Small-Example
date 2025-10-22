@@ -26,7 +26,11 @@ app.post("/api/people", (req, res) => {
   fs.writeFileSync(dataPath, JSON.stringify(people, null, 2), "utf-8");
   res.json(newPerson);
 
-  const message = JSON.stringify({ type: "new-person", person: newPerson });
+  const message = JSON.stringify({
+    type: "new-person",
+    key: "people",
+    payload: newPerson,
+  });
   wss.clients.forEach((client) => {
     if (client.readyState === client.OPEN) {
       client.send(message);
@@ -43,7 +47,11 @@ app.delete("/api/people/:id", (req, res) => {
   people.splice(index, 1);
   fs.writeFileSync(dataPath, JSON.stringify(people, null, 2), "utf-8");
   res.json({ message: "Person deleted" });
-  const message = JSON.stringify({ type: "person-deleted", id: parseInt(id) });
+  const message = JSON.stringify({
+    type: "person-deleted",
+    key: "people",
+    payload: { id: parseInt(id) },
+  });
   wss.clients.forEach((client) => {
     if (client.readyState === client.OPEN) {
       client.send(message);
